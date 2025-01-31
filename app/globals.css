@@ -19,3 +19,96 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background-color: darkred;
+}
+
+/* Global styles for centering and styling the markdown content */
+.markdown-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height of the viewport */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for a document feel */
+  text-align: justify; /* Optional: Justify the text for a neat appearance */
+}
+
+/* Restrict text width for better readability */
+.markdown-content > * {
+  max-width: 800px;
+  width: 100%;
+  font-family: 'Georgia', serif;
+  line-height: 1.8;
+}
+
+/* Optional: Customize headings */
+.markdown-content h1 {
+  font-size: 2.5rem;
+  text-align: center; /* Center the main heading */
+  margin-bottom: 20px;
+}
+
+.markdown-content h2 {
+  font-size: 2rem;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.markdown-content h3 {
+  font-size: 1.75rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Paragraph styles */
+.markdown-content p {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Optional: Styling for blockquotes */
+.markdown-content blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 15px;
+  margin: 20px 0;
+  color: #555;
+}
+
+/* Lists */
+.markdown-content ul,
+.markdown-content ol {
+  margin: 15px 0;
+  padding-left: 40px;
+}
+
+.markdown-content iframe {
+  display: block;
+  margin: 1.5em 0;
+}
+
+@media print {
+  iframe {
+    display: none !important; /* Hide all iframes during printing */
+  }
+}
+
+
