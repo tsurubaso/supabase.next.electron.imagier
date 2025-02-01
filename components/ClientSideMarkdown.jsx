@@ -9,10 +9,6 @@ import ReactMarkdown from 'react-markdown';
 import Holder from 'holderjs';
 
 const ClientSideMarkdown = ({ content }) => {
-  useEffect(() => {
-    // Initialize Holder.js when the component is mounted on the client side
-    Holder.run();
-  }, []);
 
   return (
     <div className="markdown-content">

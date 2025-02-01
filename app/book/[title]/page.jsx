@@ -15,19 +15,26 @@ const BookPage = ({ params }) => {
   const title = React.use(params)?.title;
 
   useEffect(() => {
-    if (window.electron) {
-      window.electron.readFile(`/books/${title}.md`)
-        .then((content) => {
-          setFileContent(content);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          setError("Failed to load book content.");
-          setLoading(false);
-        });
-    }
-  }, [title]);
+    const fetchFileContent = async () => {
+      if (!title) return; // Skip if there's no title
+
+      try {
+        const res = await fetch(`/books/${title}.md`);
+        if (!res.ok) {
+          throw new Error(`Failed to fetch the book: ${title}`);
+        }
+
+        const content = await res.text();
+        setFileContent(content);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchFileContent();
+  }, [title]); // Fetch content only when the title is available
 
   if (loading) {
     return (

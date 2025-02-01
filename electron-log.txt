@@ -7,3 +7,44 @@ App is quitting
 App is ready
 Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
 App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+Window closed
+App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+Window closed
+App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+Window closed
+App is quitting
+App is ready
+App is ready
+App is ready
+App is ready
+Window closed
+App is quitting
+App is ready
+Window closed
+App is quitting
+App is ready
+Window closed
+App is quitting
