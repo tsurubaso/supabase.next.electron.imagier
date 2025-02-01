@@ -4,13 +4,12 @@ import NavBar from '../../components/NavBar';
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import supabase from "../../supabaseClient";
-
 import { useRouter } from "next/navigation";
 
 const StoriesList = () => {
   const [stories, setStories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  0;
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -33,6 +32,7 @@ const StoriesList = () => {
       } else {
         setStories(data);
       }
+      setIsLoading(false); // Set isLoading to false once fetching is done
     };
 
     fetchStories();
@@ -41,23 +41,27 @@ const StoriesList = () => {
   return (
     <div>
       <div className="min-h-screen bg-gray-50 p-4">
-      <NavBar />
+        <NavBar />
         <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
           Stories List
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {stories.map((story) => (
-            <Link key={story.id} href={`/stories/${story.link}`} passHref>
-              <div className="bg-white p-4 rounded-lg shadow-md hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {story.title}
-                </h3>
-                <p className="text-gray-700 mt-2">{story.description}</p>
-                <p className="text-sm text-gray-500 mt-2">{story.type}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center">Loading...</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {stories.map((story) => (
+              <Link key={story.id} href={`/stories/${story.link}`} passHref>
+                <div className="bg-white p-4 rounded-lg shadow-md hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer">
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {story.title}
+                  </h3>
+                  <p className="text-gray-700 mt-2">{story.description}</p>
+                  <p className="text-sm text-gray-500 mt-2">{story.type}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

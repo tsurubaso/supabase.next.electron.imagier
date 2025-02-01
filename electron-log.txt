@@ -1,0 +1,9 @@
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is quitting
+App is ready
+Resolved Preload Path: C:\Users\sylva\Desktop\supabase.next.electron.imagier\preload.js
+App is quitting
