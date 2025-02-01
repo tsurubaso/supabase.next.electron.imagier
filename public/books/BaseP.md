@@ -1,7 +1,7 @@
 # Base P
 ## Auteur : Tsurubaso
 
-![Image1](/images/800400.png)Base P
+![Image1](/images/800400.png)
 La salle d’attente, une salle d’attente comme on pourrait en imaginer partout, comme on pourrait en voir aujourd’hui. Des chaises simples, pas spécialement confortables, la porte du médecin, plus loin l’accueil où l’on voit deux infirmières assises derrière le pupitre à pianoter, le visage éclairé par leurs écrans. Une lumière blanche assez forte, une salle d’attente quoi.
 On peut deviner que le designer d’intérieur a choisi comme thème la bulle, bulles de savon. Bulle de mousse sur un parterre de nuages avec en fond une légère teinte bleutée. Musique d’aéroport. Il ne manquerait plus que l’aquarium rempli de poissons tropicaux aux couleurs vives, de taille minuscule et la plante verte, elle aussi tropicale. Soit dit en passant, n’allez jamais chez un médecin dont les plantes vertes se meurent, les plantes sont la représentation de l’entente interne de l’équipe de la clinique. Oui, si l’employé est insatisfait, pourquoi il s’occuperait des plantes malheureusement essaye de gratter cette théorie, elle est souvent vrai.
 Là pas de plante, ni d’aquarium, quelques informations au mur. Et dans la salle d’attente un jeune homme en short, T-shirt, tennis, mince, élégant et élancé.
