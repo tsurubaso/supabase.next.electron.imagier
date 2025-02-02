@@ -48,12 +48,6 @@ const NavBar = () => {
           >
             Drafts
           </button>
-          <button
-            onClick={() => router.push("/editor")}
-            className="hover:text-gray-300"
-          >
-            Editor
-          </button>
         </div>
 
         {/* Center Print Button */}
