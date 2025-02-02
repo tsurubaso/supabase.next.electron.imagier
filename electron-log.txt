@@ -24,3 +24,4 @@ Window closed
 App is quitting
 App is ready
 App is ready
+App is ready
