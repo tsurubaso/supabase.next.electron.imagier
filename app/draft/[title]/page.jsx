@@ -11,7 +11,18 @@ const BookPage = ({ params }) => {
   const [error, setError] = useState(null);
 
   // Unwrap params.title using React.use()
-  const title = React.use(params)?.title;
+  //const title = React.use(params)?.title;
+
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    const unwrapParams = async () => {
+      const unwrappedParams = await params;
+      setTitle(unwrappedParams.title);
+    };
+
+    unwrapParams();
+  }, [params]);
 
   useEffect(() => {
     const fetchFileContent = async () => {
@@ -34,6 +45,11 @@ const BookPage = ({ params }) => {
 
     fetchFileContent();
   }, [title]); // Fetch content only when the title is available
+
+  const handleEdit = () => {
+    const relativePath = `public/books/${title}.md`;
+    window.electron.openFile(relativePath);
+  };
 
   if (loading) {
     return (
@@ -61,7 +77,17 @@ const BookPage = ({ params }) => {
       <NavBar />
       <div className="p-8">
         <div className="markdown-content">
-          <ReactMarkdown rehypePlugins={[rehypeRaw]}>{fileContent}</ReactMarkdown>
+          <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+            {fileContent}
+          </ReactMarkdown>
+        </div>
+        <div className="mt-4">
+          <button
+            className="py-2 px-4 bg-indigo-500 text-white rounded-md shadow hover:bg-indigo-600 transition"
+            onClick={handleEdit}
+          >
+            Edit Story
+          </button>
         </div>
       </div>
     </div>

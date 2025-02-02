@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require("electron");
+
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const { exec } = require('child_process');
 const fs = require("fs");
 
 const logStream = fs.createWriteStream(
@@ -19,7 +21,7 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: false,
-      webSecurity: true, // 
+      webSecurity: true, /////////////////////
     },
   });
 
@@ -40,21 +42,34 @@ function createWindow() {
 app.whenReady().then(() => {
   logStream.write("App is ready\n");
 
+  createWindow();
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
-  createWindow();
 });
+
+
+ipcMain.on('open-file', (event, relativePath) => {
+  const libreOfficePath = "C:/Program Files/LibreOffice/program/soffice.exe"; // Adjust the path if necessary
+const absolutePath = path.join(__dirname, relativePath); // Convert to absolute path
+exec(`"${libreOfficePath}" "${absolutePath}"`, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error opening file: ${error.message}`);
+    return;
+  }
+  console.log(`File opened successfully: ${stdout}`);
+});
+});
+
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
-
-
 
 app.on("quit", () => {
   logStream.write("App is quitting\n");
