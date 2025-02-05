@@ -102,3 +102,6 @@ Setup Database
 App is ready
 window created
 Setup Database
+App is ready
+window created
+Setup Database
