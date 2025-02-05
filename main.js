@@ -2,7 +2,9 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const { exec } = require("child_process");
 const fs = require("fs");
-
+const grayMatter = require('gray-matter');
+const sqlite3 = require('sqlite3').verbose();
+const fsp = require('fs').promises;
 const logStream = fs.createWriteStream(
   path.join(__dirname, "electron-log.txt"),
   { flags: "a" }
@@ -22,7 +24,7 @@ function createWindow() {
       webSecurity: true, /////////////////////
     },
   });
-
+  logStream.write("window created\n");
   win.setMenuBarVisibility(false);
   win.setAutoHideMenuBar(true);
 
@@ -35,6 +37,11 @@ function createWindow() {
   win.on("closed", () => {
     logStream.write("Window closed\n");
   });
+
+      // Database setup
+      setupDatabase();
+      logStream.write("Setup Database\n");
+
 }
 
 app.whenReady().then(() => {
@@ -71,3 +78,105 @@ app.on("quit", () => {
   logStream.write("App is quitting\n");
   logStream.end();
 });
+
+function setupDatabase() {
+  // Path to the books folder
+  const booksFolder = path.join(__dirname, 'public', 'books');
+
+  // Open SQLite database
+  let db = new sqlite3.Database('./books.db', (err) => {
+      if (err) {
+          console.error(err.message);
+      }
+      console.log('Connected to the SQLite database.');
+  });
+
+  // Drop the existing table if it exists
+  db.run(`DROP TABLE IF EXISTS books`, (err) => {
+      if (err) {
+          console.error(err.message);
+      }
+      console.log('Dropped the existing books table.');
+
+      // Create a new table
+      db.run(`CREATE TABLE IF NOT EXISTS books (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+      
+          author TEXT
+         
+      )`, (err) => {
+          if (err) {
+              console.error(err.message);
+              return;
+          }
+          console.log('Created the books table.');
+
+          // Read files from the books folder and insert data
+          insertBooksData(db, booksFolder);
+      });
+  });
+
+
+
+  
+
+
+}
+
+async function insertBooksData(db, booksFolder) {
+  try {
+      const files = await fsp.readdir(booksFolder);
+
+      for (const file of files) {
+          // Ignore .git file
+          if (file === '.git') continue;
+
+          // Read the markdown file
+          const filePath = path.join(booksFolder, file);
+          const fileContents = await fsp.readFile(filePath, 'utf8');
+
+          // Parse the front matter
+          const { data } = grayMatter(fileContents);
+
+          // Ensure data contains author
+          if (!data.author) {
+              console.error(`Missing author in file: ${file}`);
+              continue;
+          }
+
+          // Insert data into SQLite
+          await new Promise((resolve, reject) => {
+              db.run(`INSERT INTO books (author) VALUES (?)`,
+                  [data.author],
+                  (err) => {
+                      if (err) {
+                          console.error(err.message);
+                          reject(err);
+                      } else {
+                          console.log(`Inserted ${data.author} into the database.`);
+                          resolve();
+                      }
+                  }
+              );
+          });
+      }
+      console.log('All files have been processed.');
+  } catch (err) {
+      console.error(err);
+  } finally {
+      // Close the database connection
+      db.close((err) => {
+          if (err) {
+              console.error(err.message);
+          } else {
+              console.log('Database connection closed.');
+          }
+      });
+  }
+}
+
+
+
+
+
+

@@ -50,3 +50,55 @@ App is ready
 Window closed
 App is quitting
 App is ready
+App is ready
+window created
+Setup Database
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+App is ready
+window created
+Setup Database
+App is ready
+window created
+Setup Database
+Window closed
+App is quitting
+App is ready
+window created
+Setup Database
+App is ready
+window created
+Setup Database
