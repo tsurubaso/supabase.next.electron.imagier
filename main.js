@@ -1,7 +1,6 @@
-
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const { exec } = require('child_process');
+const { exec } = require("child_process");
 const fs = require("fs");
 
 const logStream = fs.createWriteStream(
@@ -11,7 +10,6 @@ const logStream = fs.createWriteStream(
 
 function createWindow() {
   const preloadPath = path.join(__dirname, "preload.js");
-
 
   const win = new BrowserWindow({
     width: 800,
@@ -51,19 +49,17 @@ app.whenReady().then(() => {
   });
 });
 
-
-ipcMain.on('open-file', (event, relativePath) => {
+ipcMain.on("open-file", (event, relativePath) => {
   const libreOfficePath = "C:/Program Files/LibreOffice/program/soffice.exe"; // Adjust the path if necessary
-const absolutePath = path.join(__dirname, relativePath); // Convert to absolute path
-exec(`"${libreOfficePath}" "${absolutePath}"`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error opening file: ${error.message}`);
-    return;
-  }
-  console.log(`File opened successfully: ${stdout}`);
+  const absolutePath = path.join(__dirname, relativePath); // Convert to absolute path
+  exec(`"${libreOfficePath}" "${absolutePath}"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error opening file: ${error.message}`);
+      return;
+    }
+    console.log(`File opened successfully: ${stdout}`);
+  });
 });
-});
-
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

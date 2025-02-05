@@ -46,3 +46,7 @@ App is quitting
 App is ready
 Window closed
 App is quitting
+App is ready
+Window closed
+App is quitting
+App is ready
