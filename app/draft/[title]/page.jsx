@@ -27,14 +27,18 @@ const BookPage = ({ params }) => {
   useEffect(() => {
     const fetchFileContent = async () => {
       if (!title) return; // Skip if there's no title
-
+    
       try {
         const res = await fetch(`/books/${title}.md`);
         if (!res.ok) {
           throw new Error(`Failed to fetch the book: ${title}`);
         }
-
-        const content = await res.text();
+    
+        let content = await res.text();
+    
+        // Remove front matter (--- key: value ---)
+        content = content.replace(/^---[\s\S]+?---\s*/, ""); 
+    
         setFileContent(content);
         setLoading(false);
       } catch (err) {
@@ -42,6 +46,7 @@ const BookPage = ({ params }) => {
         setLoading(false);
       }
     };
+    
 
     fetchFileContent();
   }, [title]); // Fetch content only when the title is available
@@ -49,6 +54,11 @@ const BookPage = ({ params }) => {
   const handleEdit = () => {
     const relativePath = `public/books/${title}.md`;
     window.electron.openFile(relativePath);
+  };
+
+  const handleCompare = () => {
+    const relativePath = `public/books/${title}.md`;
+    window.electron.compareFile(relativePath);
   };
 
   if (loading) {
@@ -81,12 +91,18 @@ const BookPage = ({ params }) => {
             {fileContent}
           </ReactMarkdown>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex space-x-4">
           <button
-            className="py-2 px-4 bg-indigo-500 text-white rounded-md shadow hover:bg-indigo-600 transition"
+            className="py-2 px-4 bg-indigo-400 text-white rounded-md shadow hover:bg-indigo-600 transition"
             onClick={handleEdit}
           >
             Edit Story
+          </button>
+          <button
+            className="py-2 px-4 bg-violet-400 text-white rounded-md shadow hover:bg-violet-600 transition"
+            onClick={handleCompare}
+          >
+            Compare to Previous Version
           </button>
         </div>
       </div>
