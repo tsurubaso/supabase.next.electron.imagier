@@ -5,10 +5,7 @@ const fs = require("fs");
 const grayMatter = require("gray-matter");
 const sqlite3 = require("sqlite3").verbose();
 const fsp = require("fs").promises;
-const logStream = fs.createWriteStream(
-  path.join(__dirname, "electron-log.txt"),
-  { flags: "a" }
-);
+
 
 function createWindow() {
   const preloadPath = path.join(__dirname, "preload.js");
@@ -24,27 +21,27 @@ function createWindow() {
       webSecurity: true, /////////////////////
     },
   });
-  logStream.write("window created\n");
+ console.log("window created\n");
   win.setMenuBarVisibility(false);
   win.setAutoHideMenuBar(true);
 
   win.loadURL("http://localhost:3000");
 
   win.webContents.on("did-fail-load", () => {
-    logStream.write("Failed to load content\n");
+   console.log("Failed to load content\n");
   });
 
   win.on("closed", () => {
-    logStream.write("Window closed\n");
+   console.log("Window closed\n");
   });
 
   // Database setup
   setupDatabase();
-  logStream.write("Setup Database\n");
+ console.log("Setup Database\n");
 }
 
 app.whenReady().then(() => {
-  logStream.write("App is ready\n");
+ console.log("App is ready\n");
 
   createWindow();
 
@@ -87,8 +84,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("quit", () => {
-  logStream.write("App is quitting\n");
-  logStream.end();
+ console.log("App is quitting\n");
 });
 
 function setupDatabase() {
