@@ -6,7 +6,6 @@ const grayMatter = require("gray-matter");
 const sqlite3 = require("sqlite3").verbose();
 const fsp = require("fs").promises;
 
-
 function createWindow() {
   const preloadPath = path.join(__dirname, "preload.js");
 
@@ -21,27 +20,27 @@ function createWindow() {
       webSecurity: true, /////////////////////
     },
   });
- console.log("window created\n");
+  console.log("window created\n");
   win.setMenuBarVisibility(false);
   win.setAutoHideMenuBar(true);
 
   win.loadURL("http://localhost:3000");
 
   win.webContents.on("did-fail-load", () => {
-   console.log("Failed to load content\n");
+    console.log("Failed to load content\n");
   });
 
   win.on("closed", () => {
-   console.log("Window closed\n");
+    console.log("Window closed\n");
   });
 
   // Database setup
   setupDatabase();
- console.log("Setup Database\n");
+  console.log("Setup Database\n");
 }
 
 app.whenReady().then(() => {
- console.log("App is ready\n");
+  console.log("App is ready\n");
 
   createWindow();
 
@@ -84,7 +83,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("quit", () => {
- console.log("App is quitting\n");
+  console.log("App is quitting\n");
 });
 
 function setupDatabase() {
@@ -108,11 +107,16 @@ function setupDatabase() {
 
     // Create a new table
     db.run(
-        `CREATE TABLE IF NOT EXISTS books (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          author TEXT,
-          filename TEXT,
-          filepath TEXT
+      `CREATE TABLE IF NOT EXISTS books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    illu_author TEXT,
+    text_author TEXT,
+    title TEXT,
+    type TEXT,
+    description TEXT,
+    status TEXT,
+    link TEXT,
+    lecture INTEGER
         )`,
       (err) => {
         if (err) {
@@ -129,58 +133,72 @@ function setupDatabase() {
 }
 
 async function insertBooksData(db, booksFolder) {
-    try {
-      const files = await fsp.readdir(booksFolder);
-  
-      for (const file of files) {
-        // Ignore .git file
-        if (file === ".git") continue;
-  
-        // Read the markdown file
-        const filePath = path.join(booksFolder, file);
-        const fileContents = await fsp.readFile(filePath, "utf8");
-  
-        // Extract filename without extension
-        const filename = path.parse(file).name;
-  
-        // Remove front matter (tags) before storing content
-        const content = fileContents.replace(/^---[\s\S]+?---\s*/, "");
-  
-        // Parse front matter
-        const { data } = grayMatter(fileContents);
-  
-       // Ensure data contains author
-       if (!data.author) {
-        console.error(`Missing author in file: ${file}`);
-        continue;
-      }
-  
-        // Insert into SQLite
-        await new Promise((resolve, reject) => {
-          db.run(
-            `INSERT INTO books (author, filename, filepath) VALUES (?, ?, ?)`,
-            [data.author, filename, filePath],
-            (err) => {
-              if (err) {
-                console.error(err.message);
-                reject(err);
-              } else {
-                console.log(`Inserted ${filename} into the database.`);
-                resolve();
+  try {
+    const files = await fsp.readdir(booksFolder);
+
+    // Process all files in parallel
+    const insertPromises = files
+      .filter(file => file !== ".git") // Ignore .git
+      .map(async (file) => {
+        try {
+          const filePath = path.join(booksFolder, file);
+          const fileContents = await fsp.readFile(filePath, "utf8");
+
+          // Extract filename without extension
+          const filename = path.parse(file).name;
+
+          // Parse front matter
+          const { data } = grayMatter(fileContents);
+
+          // Ensure data contains required fields
+          if (!data.text_author || !data.title) {
+            console.error(`Missing required data in file: ${file}`);
+            return;
+          }
+
+          // Insert into SQLite using a Promise
+          return new Promise((resolve, reject) => {
+            db.run(
+              `INSERT INTO books (illu_author, text_author, title, type, description, status, link, lecture) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+              [
+                data.illu_author || null, 
+                data.text_author, 
+                data.title, 
+                data.type || null, 
+                data.description || null, 
+                data.status || null, 
+                data.link || null, 
+                data.lecture || 0
+              ],
+              (err) => {
+                if (err) {
+                  console.error(`Error inserting ${file}:`, err.message);
+                  reject(err);
+                } else {
+                  console.log(`Inserted ${data.title} into the database.`);
+                  resolve();
+                }
               }
-            }
-          );
-        });
-      }
-  
-    console.log("All files have been processed.");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      // Close the database connection
-      db.close((err) => {
-        if (err) console.error(err.message);
-        else console.log("Database connection closed.");
+            );
+          });
+
+        } catch (fileError) {
+          console.error(`Error processing file ${file}:`, fileError);
+        }
       });
-    }
+
+    // Wait for all insertions to finish
+    await Promise.all(insertPromises);
+
+    console.log("All files have been processed.");
+  } catch (err) {
+    console.error("Error reading files:", err);
+  } finally {
+    // Close the database connection
+    db.close((err) => {
+      if (err) console.error(err.message);
+      else console.log("Database connection closed.");
+    });
   }
+}
