@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 const StoriesList = () => {
   const [stories, setStories] = useState([]);
   const router = useRouter();
-  0;
+  
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -21,18 +21,12 @@ const StoriesList = () => {
       // If no session, redirect to login page
       if (!session) {
         router.push("/login");
-        return; // Prevent fetching stories if not logged in
+        return; // Prevent fetching stories if not logged in 
       }
 
-      const { data, error } = await supabase
-        .from("stories") // Ensure you have a 'stories' table
-        .select("*");
+      const data = await window.electron.getBooks(); // Récupère toutes les entrées
+      setStories(data.filter(story => story.status === "story")); // Filtre en front-end
 
-      if (error) {
-        console.error(error);
-      } else {
-        setStories(data);
-      }
     };
 
     fetchStories();
@@ -41,7 +35,7 @@ const StoriesList = () => {
   return (
     <div>
       <div className="min-h-screen bg-gray-50 p-4">
-      <NavBar />
+        <NavBar />
         <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
           Stories List
         </h1>
@@ -54,6 +48,7 @@ const StoriesList = () => {
                 </h3>
                 <p className="text-gray-700 mt-2">{story.description}</p>
                 <p className="text-sm text-gray-500 mt-2">{story.type}</p>
+                <p className="text-sm text-gray-500 mt-2">Nombre de lectures: {story.lecture}</p>
               </div>
             </Link>
           ))}

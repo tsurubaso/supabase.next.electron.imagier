@@ -17,12 +17,13 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: false,
-      webSecurity: true, /////////////////////
+      webSecurity: true,
     },
   });
   console.log("window created\n");
-  win.setMenuBarVisibility(false);
-  win.setAutoHideMenuBar(true);
+
+  // win.setMenuBarVisibility(false);///////////////////////just for now
+  //  win.setAutoHideMenuBar(true);///////////////////////just for now
 
   win.loadURL("http://localhost:3000");
 
@@ -73,6 +74,30 @@ ipcMain.on("compare-file", (event, relativePath) => {
       return;
     }
     console.log(`File opened successfully in VS Code: ${stdout}`);
+  });
+});
+
+
+
+// This will listen for the "get-books" event from the renderer process
+ipcMain.handle("get-books", async () => {
+  // Path to your SQLite database
+  const dbPath = path.join(__dirname, "books.db");
+
+  // Open the SQLite database
+  const db = new sqlite3.Database(dbPath);
+
+  return new Promise((resolve, reject) => {
+    db.all("SELECT * FROM books", [], (err, rows) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(rows); // Return the rows (books)
+      }
+    });
+
+    db.close();
   });
 });
 
@@ -138,7 +163,7 @@ async function insertBooksData(db, booksFolder) {
 
     // Process all files in parallel
     const insertPromises = files
-      .filter(file => file !== ".git") // Ignore .git
+      .filter((file) => file !== ".git") // Ignore .git
       .map(async (file) => {
         try {
           const filePath = path.join(booksFolder, file);
@@ -162,14 +187,14 @@ async function insertBooksData(db, booksFolder) {
               `INSERT INTO books (illu_author, text_author, title, type, description, status, link, lecture) 
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
               [
-                data.illu_author || null, 
-                data.text_author, 
-                data.title, 
-                data.type || null, 
-                data.description || null, 
-                data.status || null, 
-                data.link || null, 
-                data.lecture || 0
+                data.illu_author || null,
+                data.text_author,
+                data.title,
+                data.type || null,
+                data.description || null,
+                data.status || null,
+                data.link || null,
+                data.lecture || 0,
               ],
               (err) => {
                 if (err) {
@@ -182,7 +207,6 @@ async function insertBooksData(db, booksFolder) {
               }
             );
           });
-
         } catch (fileError) {
           console.error(`Error processing file ${file}:`, fileError);
         }

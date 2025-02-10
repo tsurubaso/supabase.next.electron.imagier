@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 const StoriesList = () => {
   const [stories, setStories] = useState([]);
   const router = useRouter();
-  0;
+  
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -26,15 +26,9 @@ const StoriesList = () => {
         return; // Prevent fetching stories if not logged in
       }
 
-      const { data, error } = await supabase
-        .from("drafts") // Ensure you have a 'stories' table
-        .select("*");
+      const data = await window.electron.getBooks(); // Récupère toutes les entrées
+      setStories(data.filter(story => story.status === "draft")); // Filtre en front-end
 
-      if (error) {
-        console.error(error);
-      } else {
-        setStories(data);
-      }
     };
 
     fetchStories();
@@ -43,9 +37,9 @@ const StoriesList = () => {
   return (
     <div>
       <div className="min-h-screen bg-gray-50 p-4">
-      <NavBar />
+        <NavBar />
         <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
-          Drafts List
+          Stories List
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {stories.map((story) => (
@@ -56,6 +50,7 @@ const StoriesList = () => {
                 </h3>
                 <p className="text-gray-700 mt-2">{story.description}</p>
                 <p className="text-sm text-gray-500 mt-2">{story.type}</p>
+                <p className="text-sm text-gray-500 mt-2">Nombre de lectures: {story.lecture}</p>
               </div>
             </Link>
           ))}
