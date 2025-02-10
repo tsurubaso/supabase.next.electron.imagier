@@ -10,14 +10,7 @@ const NavBar = () => {
     router.push("/login"); // Redirect to login page after logout
   };
 
-  const handlePrint = () => {
-    if (typeof window !== "undefined") {
-      console.log("Print button clicked");
-      window.print();
-    } else {
-      console.error("window object is not available");
-    }
-  };
+
 
   return (
     <nav className="bg-gray-800 text-white p-4">
@@ -47,16 +40,6 @@ const NavBar = () => {
             className="hover:text-gray-300"
           >
             Drafts
-          </button>
-        </div>
-
-        {/* Center Print Button */}
-        <div>
-          <button
-            className="py-2 px-6 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-            onClick={handlePrint}
-          >
-            Print Page
           </button>
         </div>
 
