@@ -40,7 +40,7 @@ export default function Welcome() {
         const { error: upsertError } = await supabase.from("stories").upsert({
           id: story.id,
           title: story.title,
-          link: story.title,
+          link: story.link,
           description: story.description,
           type: story.type,
           lecture: story.lecture,
