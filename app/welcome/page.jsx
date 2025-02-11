@@ -29,11 +29,13 @@ export default function Welcome() {
           .select("id")
           .eq("id", story.id)
           .single(); // Check if the story exists
+      
     
-        if (error && error.code !== "PGRST116") { // Ignore "not found" errors
-          console.error("Error checking story:", error);
-          continue;
-        }
+          if (error) {
+            console.error("Error checking story:", error);
+          } else {
+            console.log("Existing story found:", existingStory);
+          }
     
         const { error: upsertError } = await supabase.from("stories").upsert({
           id: story.id,
