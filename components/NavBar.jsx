@@ -41,6 +41,12 @@ const NavBar = () => {
           >
             Drafts
           </button>
+          <button
+            onClick={() => router.push("/fragment")}
+            className="hover:text-gray-300"
+          >
+            Fragments
+          </button>
         </div>
 
         {/* Right Logout Button */}
