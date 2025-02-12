@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "electron": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "devk": "concurrently \"next dev\" \"electron .\" --kill-others --success first"
+    "devk": "concurrently --kill-others \"next dev\" \"electron .\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",

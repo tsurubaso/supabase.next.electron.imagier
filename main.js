@@ -109,7 +109,6 @@ app.on("window-all-closed", () => {
 
 app.on("quit", () => {
   console.log("App is quitting\n");
-  
 });
 
 function setupDatabase() {
