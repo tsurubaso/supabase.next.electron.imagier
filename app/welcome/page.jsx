@@ -85,20 +85,31 @@ export default function Welcome() {
           Welcome to the Imagier!
         </h1>
         <p className="text-lg text-gray-700 mt-4">
-          You always have been reading wonderful stories... But what good is a
-          story without an illustration? Think about Jules Verne without Gustave
-          Doré?
+          You always have been reading wonderful stories...<br/>
+          Great Authors, Great Stories, Great Adventures.<br/>
+          But what good is a story<br/>
+          without an illustration? <br/>
+          Think about Jules Verne without Gustave Doré?
+          <iframe src="https://assets.pinterest.com/ext/embed.html?id=793900240576877946" height="669" width="345" frameborder="0" ></iframe>
+          Yes, you see, in your mind, and for generations, those stories had always been illustrated. <br/>
+          and the art of the Editor, was to combine text and image. <br/>
           <br />
           No Jules without Gustave!
           <br />
-          Here, content creators can create illustrations for already existing
-          stories and share their work. The goal is to promote and remunerate
-          illustrators.
+          Here, content creators can create illustrations for already existing stories,<br/>
+          and share their work. The goal is to promote and in the future remunerate creator.<br/>
+          illustrators, graphists, painters, photographers, 3d modelists, it's open bar<br/>
           <br />
-          You get the point. Now, I invite to read the stories, see where to put
-          your illustration, and share with us your illustration links.
+          In the future I will share with creator an other app that will ease the process made with Electron.<br/>
+          but for now just share your work, just the link we will not host it.<br/>
+          <br/>
+          For Now, I invite to read the stories, see where to put
+          your illustrations.
           <br />
-          we do the rest.
+          we will do the rest.
+          <br />
+          Also, this is a software hosted on git, then you can clone it.<br/>
+          I will add rules later on.
         </p>
       </div>
     </div>
