@@ -94,7 +94,7 @@ export default function Welcome() {
           <br />
           No Jules without Gustave!
           <br />
-          Here, content creators can create illustrate stories, and share their
+          Here, content creators can create illustrated stories, and share their
           work.
           <br />
           The goal is to promote and in the future remunerate creator,
@@ -122,7 +122,7 @@ export default function Welcome() {
           I will add rules later on but the first one is to respect the work of
           others.
           <br />
-          This imply that in the future I will bneed to better organize the
+          This imply that in the future I will need to better organize the
           public folder.
         </p>
       </div>
