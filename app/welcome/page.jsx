@@ -81,9 +81,10 @@ export default function Welcome() {
           Great Authors, Great Adventures.
           <br />
           But what good is a story without an illustration? <br />
-          Think about Jules Verne without Gustave Doré.
+          Think about Jules Verne without Gustave Doré.<br />
+          Ok...here it is Bayard, agreed!
           <iframe
-            src="https://assets.pinterest.com/ext/embed.html?id=793900240576877946"
+            src="https://assets.pinterest.com/ext/embed.html?id=814588651359847683"
             height="1089"
             width="600"
           ></iframe>

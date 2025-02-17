@@ -77,8 +77,6 @@ ipcMain.on("compare-file", (event, relativePath) => {
   });
 });
 
-
-
 // This will listen for the "get-books" event from the renderer process
 ipcMain.handle("get-books", async () => {
   // Path to your SQLite database
