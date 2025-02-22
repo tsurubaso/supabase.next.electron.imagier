@@ -47,6 +47,12 @@ const NavBar = () => {
           >
             Fragments
           </button>
+          <button
+            onClick={() => router.push("/timeline")}
+            className="hover:text-gray-300"
+          >
+            Timeline
+          </button>
         </div>
 
         {/* Right Logout Button */}
