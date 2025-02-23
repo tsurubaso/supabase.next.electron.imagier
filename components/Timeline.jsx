@@ -1,8 +1,8 @@
 // components/Timeline.js
 "use client";
-import React, { useRef, useEffect } from 'react';
-import { DataSet, Timeline } from 'vis-timeline/standalone';
-import 'vis-timeline/styles/vis-timeline-graph2d.min.css';
+import React, { useRef, useEffect } from "react";
+import { DataSet, Timeline } from "vis-timeline/standalone";
+import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 
 const TimelineComponent = ({ items }) => {
   const containerRef = useRef(null);
@@ -15,7 +15,10 @@ const TimelineComponent = ({ items }) => {
   }, [items]);
 
   return (
-    <div className="timeline-container" ref={containerRef} />
+    <div
+      className="timeline-container" 
+      ref={containerRef}
+    />
   );
 };
 

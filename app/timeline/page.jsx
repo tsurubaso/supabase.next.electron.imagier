@@ -12,15 +12,20 @@ const items = [
   { id: 6, content: 'Item 6', start: '2025-04-27' }
 ];
 
+//{ id: 4, content: 'Item 4', start: '2025-04-16', end: '2025-04-19', className: 'custom-class' , group: 1, type: 'range', style: 'background-color: blue; color: white;'}
+
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <NavBar />
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      <div className="max-w-8xl mx-auto"> {/* Increased max-width */}
+        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-8">
           Timeline
         </h1>
-        <TimelineComponent items={items} />
+        <div className="h-800 w-full"> {/* Apply desired height and width */}
+          <TimelineComponent items={items} />
+        </div>
       </div>
     </div>
   );
