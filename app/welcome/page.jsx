@@ -46,6 +46,8 @@ export default function Welcome() {
           status: story.status,
           illu_author: story.illu_author,
           text_author: story.text_author,
+          timelineStart: story.timelineStart,
+          timelineEnd: story.timelineEnd
         });
 
         if (upsertError) {

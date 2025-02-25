@@ -91,11 +91,17 @@ ipcMain.handle("get-books", async () => {
         console.error(err);
         reject(err);
       } else {
-        resolve(rows); // Return the rows (books)
+        // Convert Unix timestamps to JavaScript Date objects
+        const books = rows.map((row) => ({
+          ...row,
+          timelineStart: new Date(row.timelineStart),
+          timelineEnd: row.timelineEnd ? new Date(row.timelineEnd) : null,
+        }));
+        resolve(books); // Return the converted rows
       }
     });
 
-    db.close();
+      db.close();
   });
 });
 
@@ -139,7 +145,9 @@ function setupDatabase() {
     description TEXT,
     status TEXT,
     link TEXT,
-    lecture INTEGER
+    lecture INTEGER,
+    timelineStart DATE,
+    timelineEnd DATE
         )`,
       (err) => {
         if (err) {
@@ -182,8 +190,8 @@ async function insertBooksData(db, booksFolder) {
           // Insert into SQLite using a Promise
           return new Promise((resolve, reject) => {
             db.run(
-              `INSERT INTO books (illu_author, text_author, title, type, description, status, link, lecture) 
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+              `INSERT INTO books (illu_author, text_author, title, type, description, status, link, lecture, timelineStart, timelineEnd) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
               [
                 data.illu_author || null,
                 data.text_author,
@@ -193,6 +201,8 @@ async function insertBooksData(db, booksFolder) {
                 data.status || null,
                 data.link || null,
                 data.lecture || 0,
+                data.timelineStart || null,
+                data.timelineEnd || null,
               ],
               (err) => {
                 if (err) {
