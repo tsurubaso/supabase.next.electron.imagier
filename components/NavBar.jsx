@@ -53,6 +53,12 @@ const NavBar = () => {
           >
             Timeline
           </button>
+          <button
+            onClick={() => router.push("/tech")}
+            className="hover:text-gray-300"
+          >
+            Technologie
+          </button>
         </div>
 
         {/* Right Logout Button */}
