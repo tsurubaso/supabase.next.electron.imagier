@@ -43,7 +43,7 @@ const StoriesList = () => {
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {stories.map((story) => (
-            <Link key={story.id} href={`/draft/${story.link}`} passHref>
+            <Link key={story.id} href={`/tech/${story.link}`} passHref>
               <div className="bg-white p-4 rounded-lg shadow-md hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer">
                 <h3 className="text-xl font-semibold text-gray-900">
                   {story.title}
