@@ -113,14 +113,14 @@ export default function Welcome() {
           <br />
           Later on, I will also open this space to writers, but not yet.
           <br />
-          For now, just share your work—only the link, we will not host it.
+          For now, just share your link, we will not host it.
           <br />
           <br />
           I invite you to read the stories, see where illustrations can fit, and
           we will take care of the rest.
           <br />
           <br />
-          Also, this is a software hosted on git, then you can clone it.
+          Also, this is a software hosted on github, then you can clone it.
           <br />
           I will add rules later on but the first one is to respect the work of
           others.

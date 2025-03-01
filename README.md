@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## Welcome to the Imagier!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Welcome to the Imagier!
+You always have been reading wonderful stories...
+Great Authors, Great Adventures.
+But what good is a story without an illustration?
+Think about Jules Verne without Gustave Doré.
+Ok...here it is Bayard, agreed!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+      <iframe
+            src="https://assets.pinterest.com/ext/embed.html?id=814588651359847683"
+            height="1089"
+            width="600"
+          ></iframe>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Yes, you see, in your mind, and for generations, those stories had always been illustrated.
+The art of the Editor has always been to combine text and image.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+No Jules without Gustave!
+Here, content creators can create illustrated stories, and share their work.
+The goal is to promote, and in the future remunerate creator,
+illustrators, graphic designers, painters, photographers, 3d artists... it's open bar!
 
-## Learn More
+In the future, I will share with creators this app made with Electron that will simplify the process.
+You will have more control and autonomy.
+Later on, I will also open this space to writers, but not yet.
+For now, just share your link, we will not host it.
 
-To learn more about Next.js, take a look at the following resources:
+I invite you to read the stories, see where illustrations can fit, and we will take care of the rest.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Also, this is a software hosted on github, then you can clone it.
+I will add rules later on but the first one is to respect the work of others.
+This imply that in the future I will need to better organize the public folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
