@@ -2,7 +2,6 @@
 
 ## Welcome to the Imagier!
 
-Welcome to the Imagier!
 You always have been reading wonderful stories...
 Great Authors, Great Adventures.
 But what good is a story without an illustration?
