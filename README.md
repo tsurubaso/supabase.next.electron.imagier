@@ -7,13 +7,6 @@ You always have been reading wonderful stories...
 Great Authors, Great Adventures.
 But what good is a story without an illustration?
 Think about Jules Verne without Gustave Doré.
-Ok...here it is Bayard, agreed!
-
-      <iframe
-            src="https://assets.pinterest.com/ext/embed.html?id=814588651359847683"
-            height="1089"
-            width="600"
-          ></iframe>
 
 Yes, you see, in your mind, and for generations, those stories had always been illustrated.
 The art of the Editor has always been to combine text and image.
