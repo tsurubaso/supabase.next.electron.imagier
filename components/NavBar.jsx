@@ -54,10 +54,10 @@ const NavBar = () => {
             Timeline
           </button>
           <button
-            onClick={() => router.push("/tech")}
+            onClick={() => router.push("/other")}
             className="hover:text-gray-300"
           >
-            Technologie
+            Other
           </button>
         </div>
 
