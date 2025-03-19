@@ -28,7 +28,7 @@ export default function HomePage() {
       }
 
       const timelineItems = data
-        .filter(item => item.timelineStart) // Filter out items with null or undefined timelineStart
+        .filter(item =>  item.timelineStart != null && item.timelineStart !== "" && item.timelineStart !=="1970-01-01" ) // Filter out items with null or undefined timelineStart
         .map((item) => ({
           id: item.id,
           content: item.description,
