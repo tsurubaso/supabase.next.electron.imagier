@@ -1,3 +1,18 @@
+// pages/index.js
+"use client";
+import React, { useState, useEffect } from 'react';
+import TimelineComponent from '../../components/Timeline';
+import NavBar from '../../components/NavBar';
+import supabase from "../../supabaseClient";
+
+
+
+
+
+
+//{ id: 4, content: 'Item 4', start: '2025-04-16', end: '2025-04-19', className: 'custom-class' , group: 1, type: 'range', style: 'background-color: blue; color: white;'}
+
+
 export default function HomePage() {
   const [items, setItems] = useState([]);
 
