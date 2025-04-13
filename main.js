@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const { exec } = require("child_process");
-const fs = require("fs");
 const grayMatter = require("gray-matter");
 const sqlite3 = require("sqlite3").verbose();
 const fsp = require("fs").promises;
